@@ -1,0 +1,23 @@
+#ifndef _GAME_
+#define _GAME_
+
+#include <stdio.h>
+#include <windows.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define LINE 30
+#define ROW 30
+#define BOMB 300
+
+char board[ROW][LINE];
+
+void game(void);
+void menu(void);
+void map(unsigned short int bomb);
+void initmap(unsigned short int line, unsigned short int row, unsigned short int bomb);
+short int findbomb(void);
+void scanbomb(char board[ROW][LINE], short int line, short int row);
+
+
+#endif
