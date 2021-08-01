@@ -17,14 +17,11 @@ int main(void){
 }
 
 void binary(unsigned int num){
-    if (num != 0){
+    if (num){
         printf("%u", (num % 2));
         binary(num /= 2);
     }
-    else{
-        putchar('0');
-    }
-    
+
     putchar('\n');
     return;
 }
