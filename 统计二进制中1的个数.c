@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <windows.h>
 
-unsigned short int count(unsigned int num);
+unsigned short int count(int num);
 
 int main(void){
     int num = 0;
@@ -22,14 +22,12 @@ int main(void){
     return 0;
 }
 
-unsigned short int count(unsigned int num){
+unsigned short int count(int num){
     unsigned short int result = 0;
 
         while (num){
-        if (num % 2){
-                result++;
-            }
-            num /= 2;
+            result++;
+            num &= num - 1;
         }
 
     return result;
