@@ -4,15 +4,17 @@
 #include <string.h>
 #include <assert.h>
 
+#define SZ 2000
+
 char* kmp_serch(const char* arr, const char* dest);
 char* build_next(const char dest[], size_t sz);
 
 int main(void) {
     FILE* file = fopen64("test.txt", "r");
-    char arr[1024] = { 0 };
-    fread(arr, 1, 1024, file);
+    char arr[SZ + 24] = { 0 };
+    fread(arr, 1, (size_t)SZ, file);
 
-    printf("%s\n", kmp_serch(arr, "tlwhcqjf"));
+    printf("%s\n", kmp_serch(arr, "The string to search for"));
 
     fclose(file);
     system("pause");
@@ -41,8 +43,9 @@ char* kmp_serch(const char* arr, const char* dest) {
         else if (j != 0){
             j = next[j - 1];
         }
-
-        i++;
+        else {
+            i++;
+        }
     } while (arr[i]);
 
     free(next);
@@ -63,17 +66,13 @@ char* build_next(const char dest[], size_t sz) {
     for (; i < sz; i++) {
         if (dest[j] == dest[i]) {
             next[i] = ++width;
+            j++;
         }
         else if (i > 1 && j > 0) {
             j = next[j - 1];
-
-            if (dest[j] == dest[i]) {
-                next[i] = (next[j + 1] + 1);
-            }
-            else {
-                j = 0;
-                width = 0;
-            }
+            j = 0;
+            width = 0;
+            next[i] = 0;
         }
         else {
             next[i] = 0;
